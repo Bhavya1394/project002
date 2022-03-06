@@ -3,5 +3,5 @@ a=10
 echo $a
 b=redhat
 echo $b
-DATE = $(date +%F)
+DATE=$(date +%F)
 echo welcome today date is $DATE
