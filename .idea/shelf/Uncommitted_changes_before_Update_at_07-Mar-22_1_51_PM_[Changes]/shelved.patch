@@ -1,0 +1,31 @@
+Index: roboshop/Roboshop2/Testing 2
+===================================================================
+diff --git a/roboshop/Roboshop2/Testing 2 b/roboshop/Roboshop2/Testing 2
+deleted file mode 100644
+--- a/roboshop/Roboshop2/Testing 2	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
++++ /dev/null	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
+@@ -1,1 +0,0 @@
+-Teaching to Trainer
+\ No newline at end of file
+Index: roboshop/Testing
+===================================================================
+diff --git a/roboshop/Testing b/roboshop/Testing
+deleted file mode 100644
+--- a/roboshop/Testing	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
++++ /dev/null	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
+@@ -1,1 +0,0 @@
+-any content
+\ No newline at end of file
+Index: file_int_1
+===================================================================
+diff --git a/file_int_1 b/file_int_1
+deleted file mode 100644
+--- a/file_int_1	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
++++ /dev/null	(revision 0fdbe783729edf42281cb357f94758307a47e5df)
+@@ -1,5 +0,0 @@
+-Hello,
+-
+-Welcome to IntelliJ Idea.
+-
+-Welcome to the git repos
+\ No newline at end of file
