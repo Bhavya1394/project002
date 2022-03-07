@@ -1,5 +1,5 @@
 help:   ##Print this message
-	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$\\' | sed -e 's/##//'
+	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 cart:   ## Install Cart component
 	@echo Installing Cart
 catalogue:  ##Install Catalogue component
