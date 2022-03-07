@@ -22,3 +22,4 @@ User:     ## Install User component
 	@echo Installing User
 databases: ## Install All Databases
 databases: mongodb mysql rabbitmq redis
+instead: of @echo we can also use @bash
