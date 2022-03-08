@@ -13,11 +13,11 @@ PRINT "Remove Old HtDocs"
 cd /usr/share/nginx/html &>>$LOG && rm -rf* &>>$LOG
 STAT_CHECK $?
 
-PRINT "Extract frontend archive"
+PRINT "Extract frontend archive\t"
 unzip /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG && rm -rf frontend-master static &>>$LOG
 STAT_CHECK $?
 
-PRINT "Update Roboshop config"
+PRINT "Update Roboshop config\t"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
 STAT_CHECK $?
 
