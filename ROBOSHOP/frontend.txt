@@ -21,7 +21,7 @@ PRINT "Update Roboshop config\t"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
 STAT_CHECK $?
 
-PRINT "Enabling Nginx\t"
+PRINT "Enabling Nginx\t\t"
 systemctl enable nginx &>>$LOG
 STAT_CHECK $?
 
