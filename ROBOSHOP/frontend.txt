@@ -1,21 +1,24 @@
 #!/bin/bash
-LOG=/tmp/ROBOSHOP.log
-rm -f $LOG
+source common.sh
 
-STAT_CHECK() {
- if [ $1 -eq 0 ]; then
-    echo -e "\e[32m done\e[0m"
- else
-    echo -e "\e[31m fail\e[0m"
-    exit 1
- fi
-}
-
-PRINT() {
-    echo -n -e "$1\t\t..."
-}
 PRINT "Installing Nginx"
 yum install nginx -y &>>$LOG
+STAT_CHECK $?
+
+PRINT "Download frontend"
+curl -s -l -o /tmp/frontend.zip"https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>LOG
+STAT_CHECK $?
+
+PRINT "Remove Old HtDocs"
+cd /usr/share/nginx/html &>>$LOG && rm -rf* &>>$LOG
+STAT_CHECK $?
+
+PRINT "Extract frontend archive"
+unzip /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG && rm -rf frontend-master static &>>$LOG
+STAT_CHECK $?
+
+PRINT "Update Roboshop config"
+mv localhost.conf /etc/nginx/default.d/roboshop.conf &>>$LOG
 STAT_CHECK $?
 
 PRINT "Enabling Nginx\t"
