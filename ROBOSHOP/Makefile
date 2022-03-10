@@ -23,3 +23,4 @@ User:     ## Install User component
 databases: ## Install All Databases
 databases: mongodb mysql rabbitmq redis
 instead: of @echo we can also use @bash
+make command is used to see the output
