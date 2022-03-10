@@ -1,1 +1,6 @@
-this is a catalogue file
+#!/bin/bash
+source /home/raghu/project002/ROBOSHOP/common.sh
+
+PRINT "Install NodeJS"
+yum install nodejs make gcc-c++ -y &>>$LOG
+STAT_CHECK $?
