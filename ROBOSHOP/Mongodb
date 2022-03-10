@@ -4,12 +4,23 @@ source /home/raghu/git_prac/project002/ROBOSHOP/common.sh
 PRINT "Setting up repository\t"
 echo '[mongodb-org-4.2]
 name=MongoDB Repository
-baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.2/x86-64/
+baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/3.4/x86-64/
 gpgcheck=1
 enabled=1
-gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc' >/etc/yum.repos.d/mongodb.repo
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc' >/etc/yum.repos.d/mongodb.repo
 STAT_CHECK $?
 
-PRINT "Install MongoDB\t\t"
-yum install -y mongodb-org &>>$LOG
-STAT_CHECK $?
+#PRINT "Install MongoDB\t\t"
+#yum install -y mongodb-org &>>$LOG
+#STAT_CHECK $?
+
+#PRINT "Update MongoDB Listen Address"
+#sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+#STAT_CHECK $?
+
+#PRINT "Start MongoDB Service\t"
+#systemctl enable mongod &>>$LOG && systemctl start mongod &>>$LOG
+#STAT_CHECK $?
+
+#PRINT "Download MongoDB Schema\t"
+
