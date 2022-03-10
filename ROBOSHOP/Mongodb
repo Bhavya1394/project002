@@ -2,7 +2,7 @@
 source /home/raghu/git_prac/project002/ROBOSHOP/common.sh
 
 PRINT "Setting up repository\t"
-echo '[mongodb-org-4.2]
+echo '[mongodb-org-3.4]
 name=MongoDB Repository
 baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/3.4/x86-64/
 gpgcheck=1
