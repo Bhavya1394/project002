@@ -1,1 +1,6 @@
-this is a user file
+#!/bin/bash
+source /home/raghu/project002/ROBOSHOP/common.sh
+
+COMPONENT=user
+NODEJS
+
