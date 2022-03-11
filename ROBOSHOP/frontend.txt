@@ -1,7 +1,7 @@
 #!/bin/bash
 source /home/raghu/project002/ROBOSHOP/common.sh
 
-PRINT "Installing Nginx"
+PRINT "Installing Nginx\t"
 yum install nginx -y &>>$LOG
 STAT_CHECK $?
 
@@ -13,7 +13,7 @@ PRINT "Remove Old HtDocs\t"
 cd /usr/share/nginx/html &>>$LOG && rm -rf * &>>$LOG
 STAT_CHECK $?
 
-PRINT "Extract frontend archive"
+PRINT "Extract frontend archive\t"
 unzip /tmp/frontend.zip &>>$LOG && mv frontend-main/* . &>>$LOG && mv static/* . &>>$LOG && rm -rf frontend-master static &>>$LOG
 STAT_CHECK $?
 
