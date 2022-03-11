@@ -5,11 +5,11 @@ PRINT "Installing Nginx"
 yum install nginx -y &>>$LOG
 STAT_CHECK $?
 
-PRINT "Download frontend"
+PRINT "Download frontend\t"
 curl -s -l -o /tmp/frontend.zip "https://github.com/roboshop-devops-project/frontend/archive/main.zip" &>>LOG
 STAT_CHECK $?
 
-PRINT "Remove Old HtDocs"
+PRINT "Remove Old HtDocs\t"
 cd /usr/share/nginx/html &>>$LOG && rm -rf * &>>$LOG
 STAT_CHECK $?
 
