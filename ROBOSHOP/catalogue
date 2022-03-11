@@ -4,3 +4,45 @@ source /home/raghu/project002/ROBOSHOP/common.sh
 PRINT "Install NodeJS"
 yum install nodejs make gcc-c++ -y &>>$LOG
 STAT_CHECK $?
+
+PRINT "Add Roboshop Application User"
+id roboshop &>>$LOG
+if [ $? -ne 0 ]; then
+    useradd roboshop &>>$LOG
+fi
+STAT_CHECK $?
+
+PRINT "Download Application Code"
+curl -s -l -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$LOG
+STAT_CHECK $?
+
+PRINT "Extract Downloaded Code"
+cd /home/roboshop && unzip -o /tmp/catalogue.zip &>>$LOG && rm -rf catalogue && mv catalogue-main catalogue
+STAT_CHECK $?
+
+PRINT "Install NodeJS Dependencies"
+cd /home/roboshop/catalogue && npm install --unsafe-perm &>>$LOG
+STAT_CHECK $?
+
+PRINT "Fix Application Permissions"
+chown roboshop:roboshop /home/roboshop -R &>>$LOG
+STAT_CHECK $?
+
+PRINT "Setup systemD file\t"
+sed -i -e "/MONGO_DNSNAME/mongodb.roboshop.internal/" /home/roboshop/catalogue/systemd.service/ && mv /home/roboshop/catalogue/systemd.service/ /etc/systemd/system/catalogue.service
+STAT_CHECK $?
+
+PRINT "Start Catalogue service\t"
+systemctl daemon-reload &>>$LOG && systemctl start catalogue &>>$LOG && systemctl enable catalogue &>>$LOG
+STAT_CHECK $?
+
+
+
+
+
+
+
+
+
+
+
