@@ -1,7 +1,7 @@
 #!/bin/bash
 source /home/raghu/project002/ROBOSHOP/common.sh
 
-PRINT "Setup MySQL Repos"
+PRINT "Setup MySQL Repos\t"
 echo '[mysql57-community]'
 name=MySQL 5.7 community server
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
@@ -9,11 +9,11 @@ enabled=1
 gpgcheck=o' > /etc/yum.repos.d/mysql.repo
 STAT_CHECK $?
 
-PRINT "Install MySQL"
+PRINT "Install MySQL\t\t"
 yum install mysql-community-server -y &>>$LOG
 STAT_CHECk $?
 
-PRINT "Start MySQL Service"
+PRINT "Start MySQL Service\t"
 systemctl enable mysqld &>>$LOG && systemctl start mysqld &>>$LOG
 STAT_CHECK $?
 
@@ -25,3 +25,17 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED by 'Roboshop@1';" | mysql --conne
 fi
 STAT_CHECK $?
 
+PRINT "Uninstall MySQL Password Policy"
+echo SHOW PLUGINS | mysql -uroot -pRoboshop@1 2>>$LOG | grep -i validate_password &>>$LOG
+if [ $? -ne 0 ]; then
+    echo "uninstall plugin validate_password;" | mysql -uroot -pRoboshop@1 &>>$LOG
+fi
+STAT_CHECK $?
+
+PRINT "Download Schema\t\t"
+curl -s -l -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysqlarchive/main.zip" &>>$LOG
+STAT_CHECK $?
+
+PRINT "Load Schema\t\t"
+cd /tmp && unzip -o mysql.zip &>>$LOG && cd mysql-main && mysql -uroot -pRoboshop@1 <shipping.sql &>>$LOG
+STAT_CHECK $?
