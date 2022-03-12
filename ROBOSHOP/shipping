@@ -1,1 +1,5 @@
-this is a shipping file
+#!/bin/bash
+source /home/raghu/project002/ROBOSHOP/common.sh
+
+COMPONENT=Shipping
+JAVA
