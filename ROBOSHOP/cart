@@ -1,1 +1,5 @@
-this is a cart file
+#!/bin/bash
+source /home/raghu/project002/ROBOSHOP/common.sh
+
+COMPONENT=cart
+NODEJS
