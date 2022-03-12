@@ -1,1 +1,10 @@
-this is a MySQL file
+#!/bin/bash
+source /home/raghu/project002/ROBOSHOP/common.sh
+
+PRINT "Setup MySQL Repos"
+echo '[mysql57-community]'
+#name=MySQL 5.7 community server
+#baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+#enabled=1
+#gpgcheck=o' > /etc/yum.repos.d/mysql.repo
+STAT_CHECK $?
