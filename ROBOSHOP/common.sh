@@ -49,7 +49,7 @@ PERM_FIX() {
 }
 SETUP_SYSTEMD() {
   PRINT "Setup systemD file\t"
-  sed -i -e "/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/" -e "s/CARTENDPOINT/cart.roboshop.internal/" -e "s/DBHOST/mysql.roboshop.internal/" /home/roboshop/${COMPONENT}/systemd.service && mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
+  sed -i -e "/MONGO_DNSNAME/mongodb.roboshop.internal/" -e "s/REDIS_ENDPOINT/redis.roboshop.internal/" -e "s/MONGO_ENDPOINT/mongodb.roboshop.internal/" -e "s/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/" -e "s/CARTENDPOINT/cart.roboshop.internal/" -e "s/DBHOST/mysql.roboshop.internal/" -e "s/CARTHOST/cart.roboshop.internal/" -e "s/USERHOST/user.roboshop.internal/" -e "s/AMQPHOST/rabbitmq.roboshop.internal/" /home/roboshop/${COMPONENT}/systemd.service && mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
   STAT_CHECK $?
 
   PRINT "Start ${COMPONENT} service\t"
@@ -93,6 +93,30 @@ JAVA() {
 
   SETUP_SYSTEMD
 
+}
+
+PYTHON3() {
+  PRINT "Install Python3"
+  yum install python36 gcc python3-deve1 -y &>>$LOG
+  STAT_CHECK $?
+
+  ADD_APPLICATION_USER
+
+  DOWNLOAD_APP_CODE
+
+  PRINT "Install Python Dependencies"
+  cd /home/roboshop/${COMPONENT} && pip3 install -r requirements.txt &>>$LOG
+  STAT_CHECK $?
+
+  PRINT "Update Service Configuration"
+  userID=$(id -u roboshop)
+  groupID=$(id -g roboshop)
+  sed -i -e"/uid/ c uid = ${userID}" -e "/gid/ c gid = ${groupID}" payment.ini &>>$LOG
+  STAT_CHECK $?
+
+  PERM_FIX
+
+  SETUP_SYSTEMD
 }
 
 
