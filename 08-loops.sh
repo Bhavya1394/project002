@@ -12,8 +12,10 @@
 
 ## Ex: Run a loop for 10 times
 i=10
+j=1
 while [ $i -gt 0 ]; do
-  echo Iteration = $i
+  echo Iteration = $j
+  j=$(($j+1))
   i=$(($i-1))
 done
 
